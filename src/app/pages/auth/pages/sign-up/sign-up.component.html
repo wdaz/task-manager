@@ -1,0 +1,106 @@
+<form class="sign-up" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="text-blue-800 text-3xl"
+        >Create Account</mat-card-title
+      >
+      <mat-card-subtitle *ngIf="error" class="text-red-800">{{
+        error
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="md:flex w-100">
+        <div class="flex-1 mr-5">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter organization name</mat-label>
+            <input
+              matInput
+              placeholder="Smart Solutions"
+              required
+              type="text"
+              formControlName="organizationName"
+            />
+            <mat-error *ngIf="organizationName?.invalid">{{
+              getNameErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter organization phone number</mat-label>
+            <input
+              formControlName="organizationPhone"
+              placeholder="+994-(55)-555-55-55"
+              matInput
+              required
+              type="tel"
+            />
+            <mat-error *ngIf="organizationPhone?.invalid">{{
+              getPhoneErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter organization address</mat-label>
+            <input
+              formControlName="organizationAddress"
+              placeholder="8 Qurban Khalilov, Baku"
+              matInput
+              required
+              type="text"
+            />
+            <mat-error *ngIf="organizationAddress?.invalid">{{
+              getAddressErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="flex-1">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter username</mat-label>
+            <input
+              matInput
+              placeholder="example"
+              required
+              type="text"
+              formControlName="username"
+            />
+            <mat-error *ngIf="username?.invalid">{{
+              getUsernameErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter email</mat-label>
+            <input
+              matInput
+              placeholder="example@example.com"
+              required
+              type="email"
+              formControlName="email"
+            />
+            <mat-error *ngIf="email?.invalid">{{
+              getEmailErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter password</mat-label>
+            <input
+              formControlName="password"
+              matInput
+              required
+              type="password"
+            />
+            <mat-error *ngIf="password?.invalid">{{
+              getPasswordErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <div class="flex justify-center">
+      <button mat-raised-button color="primary" class="text-xl">Sign up</button>
+    </div>
+  </mat-card>
+
+  <a class="sign-in" [routerLink]="['/sign-in']">Sign in</a>
+</form>

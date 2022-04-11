@@ -1,0 +1,19 @@
+main {
+  @apply h-screen flex flex-col justify-center items-center text-center md:px-0 px-5;
+
+  & h1 {
+    @apply md:text-5xl text-2xl;
+  }
+
+  & h2 {
+    @apply text-lg md:text-xl;
+  }
+
+  & a {
+    @apply text-indigo-500 font-medium;
+
+    &:hover {
+      @apply border-b border-indigo-500;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.sign-in {
+  @apply md:w-96 grid grid-flow-row gap-y-5 justify-items-center;
+
+  & .mat-card-header {
+    @apply justify-center;
+  }
+
+  & .mat-form-field {
+    @apply w-full;
+  }
+
+  .sign-up {
+    @apply text-blue-500 rounded px-5 py-2 text-sm font-medium;
+
+    &:hover {
+      @apply bg-blue-500 text-white;
+    }
+  }
+}
