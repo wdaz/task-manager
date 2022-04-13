@@ -1,1 +1,16 @@
-<p>cabinet works!</p>
+<div class="tm-container">
+  <header>
+    <tm-topbar
+      (openEvent)="isOpen = !isOpen"
+      (signOutEvent)="signOut()"
+      [user]="currentUser"
+    ></tm-topbar>
+  </header>
+  <main>
+    <tm-sidebar [isOpen]="isOpen"></tm-sidebar>
+    <div class="w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <footer></footer>
+</div>

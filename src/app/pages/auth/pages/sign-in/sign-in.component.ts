@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,7 +15,12 @@ export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   error: string | null;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.error = null;
     this.signInForm = this.registerSignInForm();
   }
@@ -46,7 +53,17 @@ export class SignInComponent implements OnInit {
 
   onSubmit() {
     if (this.f.valid) {
-      this.auth.signIn(this.f.value.email, this.f.value.password);
+      this.auth
+        .signIn(this.f.value.username, this.f.value.password)
+        .subscribe((d) => {
+          if (d.length) {
+            this.toastr.success('Welcome');
+            this.router.navigateByUrl('/cabinet');
+          }
+          if (!d.length) {
+            this.toastr.error('Wrong creadentials');
+          }
+        });
     }
   }
 

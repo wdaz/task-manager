@@ -1,5 +1,43 @@
 {
-  "organization": [],
-  "users": [],
+  "organization": [
+    {
+      "id": 1649747908662,
+      "name": "csdcdscsdc",
+      "phoneNumber": "sdcsd",
+      "address": "dscdsc"
+    },
+    {
+      "id": 1649748060672,
+      "name": "cxzc",
+      "phoneNumber": "zxczx",
+      "address": "zxczxc"
+    }
+  ],
+  "users": [
+    {
+      "id": 1649747908664,
+      "username": "dcsdcsd",
+      "password": "dcdcdss2324234",
+      "email": "csdcdscsdc",
+      "organizationName": "csdcdscsdc",
+      "role": 1
+    },
+    {
+      "id": 1649748060674,
+      "username": "xcczxc",
+      "password": "zxczxczxc232323",
+      "email": "cxzc",
+      "organizationName": "1649748060672",
+      "role": 1
+    },
+    {
+      "id": 1649752557399,
+      "username": "smart",
+      "password": "test1234",
+      "email": "Smart Solution",
+      "organizationName": "Smart Solution",
+      "role": 1
+    }
+  ],
   "tasks": []
 }

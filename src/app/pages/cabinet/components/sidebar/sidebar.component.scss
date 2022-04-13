@@ -1,0 +1,16 @@
+nav {
+  @apply flex-col bg-gray-50 shadow absolute;
+  min-height: calc(100vh - 64px);
+
+  & .active {
+    @apply text-indigo-800 font-medium;
+  }
+}
+
+.open {
+  @apply w-52 flex;
+}
+
+.close {
+  @apply hidden;
+}

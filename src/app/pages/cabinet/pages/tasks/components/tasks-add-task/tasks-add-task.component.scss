@@ -1,0 +1,11 @@
+.task {
+  @apply grid grid-flow-row gap-y-1;
+
+  &__actions {
+    @apply flex justify-end;
+  }
+
+  textarea {
+    @apply resize-none h-24;
+  }
+}

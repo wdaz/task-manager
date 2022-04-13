@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <button
+    (click)="openEvent.emit()"
+    mat-icon-button
+    class=""
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="pb-2 pl-5">Task Manager</h1>
+  <span class="flex-1"></span>
+  <ng-template [ngIf]="user && user.role === role.ADMIN">
+    <span class="pb-2 pr-5">{{ user.organizationName }}</span>
+  </ng-template>
+  <ng-template [ngIf]="user && user.role === role.USER">
+    <span class="pb-2 pr-5">{{ user.name }} {{ user.surname }}</span>
+  </ng-template>
+
+  <button
+    mat-icon-button
+    class=""
+    aria-label="icon-button with logout icon"
+    (click)="signOutEvent.emit()"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Add new task</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="task" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter title</mat-label>
+      <input
+        matInput
+        placeholder="example"
+        required
+        type="text"
+        formControlName="title"
+      />
+      <mat-error *ngIf="f.get('title')?.invalid">
+        You must enter a value
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="deadline" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="f.get('title')?.invalid">
+        You must enter a value
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Enter description</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex. It makes me feel..."
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="f.get('description')?.invalid">
+        You must enter a value
+      </mat-error>
+    </mat-form-field>
+
+    <div class="task__actions">
+      <button mat-button color="warn" [mat-dialog-close]="false">Cancel</button>
+      <button mat-button color="primary" cdkFocusInitial>Save</button>
+    </div>
+  </form>
+</mat-dialog-content>

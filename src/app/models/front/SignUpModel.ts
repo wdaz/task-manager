@@ -1,8 +1,10 @@
+import { Role } from '@app/models/enums/role.enum';
+
 export interface SignUpModel {
-  organizationName: string;
-  organizationPhone: string;
-  organizationAddress: string;
+  id: number;
   username: string;
   email: string;
   password: string;
+  organizationName: string;
+  role: Role;
 }

@@ -1,0 +1,19 @@
+.task {
+  @apply grid grid-flow-row p-5 w-full gap-y-5;
+
+  &__header {
+    @apply flex justify-between items-center border-b border-indigo-800 pb-3;
+
+    h1 {
+      @apply text-2xl font-medium;
+    }
+  }
+
+  &__body {
+    @apply grid;
+  }
+}
+
+table {
+  @apply w-full;
+}

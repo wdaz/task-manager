@@ -1,6 +1,13 @@
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // Form module
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// Models
+import { Organization } from '@app/models/backend/Organization';
+import { SignUpModel } from '@app/models/front/SignUpModel';
+import { Role } from '@app/models/enums/role.enum';
 
 // Services
 import { AuthService } from '@app/services/auth.service';
@@ -14,7 +21,12 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   error: string | null;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.error = null;
     this.signUpForm = this.registerSignUpForm();
   }
@@ -91,7 +103,25 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
     if (this.f.valid) {
-      this.auth.signUp(this.f.value);
+      const organization: Organization = {
+        id: Date.now(),
+        name: this.f.value.organizationName,
+        phoneNumber: this.f.value.organizationPhone,
+        address: this.f.value.organizationAddress,
+      };
+
+      const user: SignUpModel = {
+        id: Date.now() + 2,
+        username: this.f.value.username,
+        password: this.f.value.password,
+        email: this.f.value.organizationName,
+        organizationName: this.f.value.organizationName,
+        role: Role.ADMIN,
+      };
+      this.auth.signUp(organization, user).subscribe(() => {
+        this.toastr.success('Successfully created');
+        this.router.navigateByUrl('sign-in');
+      });
     }
   }
 

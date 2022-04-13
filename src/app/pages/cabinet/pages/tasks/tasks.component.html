@@ -1,0 +1,33 @@
+<section class="task">
+  <header class="task__header">
+    <h1>Tasks</h1>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+      Add tasks
+    </button>
+  </header>
+  <ng-template [ngIf]="tasks.length === 0">
+    <div class="w-full flex justify-center mt-10">
+      <h1 class="not">Not have tasks</h1>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="tasks.length > 0">
+    <div class="task__body">
+      <mat-card *ngFor="let task of tasks">
+        <mat-card-header>
+          <mat-card-title>{{ task.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="flex justify-between items-center w-full text-gray-400">
+            <span>{{ task.status }}</span>
+            <span>{{ task.deadline | date }}</span>
+          </div>
+          <div class="w-full h-px bg-gray-400 mt-1 mb-3"></div>
+          <p>
+            {{ task.description }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
+</section>
