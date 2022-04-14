@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+//Guards
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   {
     path: 'cabinet',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/cabinet/cabinet.module').then((m) => m.CabinetModule),
   },
@@ -11,6 +15,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
+    pathMatch: 'full',
   },
   {
     path: '',

@@ -14,6 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 
+// Services
+import { UserService } from './services/user.service';
 @NgModule({
   declarations: [UsersComponent, UsersAddUserComponent],
   imports: [
@@ -28,5 +30,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     ReactiveFormsModule,
   ],
+  providers: [UserService],
 })
 export class UsersModule {}

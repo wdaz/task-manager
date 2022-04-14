@@ -1,4 +1,3 @@
-import { getLocalStorage } from './../shared/utils/localStorage';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,10 +9,13 @@ import { SignUpModel } from '@app/models/front/SignUpModel';
 
 // Enviroment
 import { environment } from './../../environments/environment';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+
+// RxJs
+import { BehaviorSubject, forkJoin, map, Observable } from 'rxjs';
 
 // Utils
 import {
+  getLocalStorage,
   setLocalStorage,
   removeLocalStrorage,
 } from '@app/shared/utils/localStorage';
@@ -38,9 +40,18 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  setCurrentUser(user: User | null) {
+    this.currentUserSubject.next(user);
+  }
+
   signUp(organization: Organization, user: SignUpModel) {
-    this.http.post<Organization>(this.api + '/organization', organization);
-    return this.http.post<User>(this.api + '/users', user);
+    let organizationCall = this.http.post<Organization>(
+      this.api + '/organization',
+      organization
+    );
+    let userCall = this.http.post<User>(this.api + '/users', user);
+
+    return forkJoin([organizationCall, userCall]);
   }
 
   signIn(username: string, password: string) {

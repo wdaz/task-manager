@@ -3,7 +3,11 @@
     <a mat-list-item [routerLink]="['/cabinet/tasks']" routerLinkActive="active"
       >Tasks</a
     >
-    <a mat-list-item [routerLink]="['/cabinet/users']" routerLinkActive="active"
+    <a
+      *ngIf="userRole === 1"
+      mat-list-item
+      [routerLink]="['/cabinet/users']"
+      routerLinkActive="active"
       >Users</a
     >
   </mat-nav-list>

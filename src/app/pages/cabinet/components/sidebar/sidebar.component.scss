@@ -1,5 +1,5 @@
 nav {
-  @apply flex-col bg-gray-50 shadow absolute;
+  @apply flex-col bg-gray-50 shadow absolute z-50;
   min-height: calc(100vh - 64px);
 
   & .active {

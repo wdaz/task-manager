@@ -3,11 +3,11 @@
     <tm-topbar
       (openEvent)="isOpen = !isOpen"
       (signOutEvent)="signOut()"
-      [user]="currentUser"
+      [user]="currentUser | async"
     ></tm-topbar>
   </header>
   <main>
-    <tm-sidebar [isOpen]="isOpen"></tm-sidebar>
+    <tm-sidebar [isOpen]="isOpen" [user]="currentUser | async"></tm-sidebar>
     <div class="w-full">
       <router-outlet></router-outlet>
     </div>

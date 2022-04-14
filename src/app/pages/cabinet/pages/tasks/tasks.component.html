@@ -12,8 +12,23 @@
     </div>
   </ng-template>
   <ng-template [ngIf]="tasks.length > 0">
+    <div class="task__filter">
+      <mat-form-field appearance="legacy">
+        <mat-select
+          placeholder="Select status"
+          name="status"
+          [(ngModel)]="status"
+          (ngModelChange)="filterTasksWithStatus($event)"
+        >
+          <mat-option value="">All </mat-option>
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="task__body">
-      <mat-card *ngFor="let task of tasks">
+      <mat-card *ngFor="let task of filteredTasks">
         <mat-card-header>
           <mat-card-title>{{ task.title }}</mat-card-title>
         </mat-card-header>
@@ -26,6 +41,11 @@
           <p>
             {{ task.description }}
           </p>
+          <div>
+            <p *ngFor="let user of task.usersIds">
+              {{ user | userFuleName: users }}
+            </p>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

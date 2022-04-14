@@ -5,5 +5,7 @@ export interface Task {
   title: string;
   description: string;
   deadline: string;
-  status: Status;
+  status: string;
+  usersIds: Array<number>;
+  organizationName: string;
 }

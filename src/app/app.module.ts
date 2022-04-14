@@ -11,6 +11,12 @@ import { ToastrModule } from 'ngx-toastr';
 
 // Interseptors
 import { ErrorInterceptor } from './interseptors/error.intreseptor';
+
+// Services
+import { AuthService } from '@app/services/auth.service';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,6 +34,8 @@ import { ErrorInterceptor } from './interseptors/error.intreseptor';
       useClass: ErrorInterceptor,
       multi: true,
     },
+    AuthService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

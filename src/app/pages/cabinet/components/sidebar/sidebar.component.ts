@@ -1,3 +1,4 @@
+import { User } from '@app/models/backend/User';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   @Input() isOpen: Boolean = false;
-  constructor() {}
+  @Input() user: User | null;
+  userRole = 0;
+  constructor() {
+    this.user = null;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userRole = this.user?.role as number;
+  }
 }

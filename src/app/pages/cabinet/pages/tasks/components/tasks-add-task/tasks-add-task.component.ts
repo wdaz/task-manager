@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from '@app/models/backend/User';
 
 @Component({
   selector: 'tm-tasks-add-task',
@@ -12,12 +13,14 @@ export class TasksAddTaskComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TasksAddTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { users: User[] },
     private fb: FormBuilder
   ) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       deadline: ['', Validators.required],
+      usersIds: ['', Validators.required],
       status: ['Open'],
     });
   }

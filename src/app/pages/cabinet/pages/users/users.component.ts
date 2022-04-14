@@ -5,7 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '@app/models/backend/User';
+import { AuthService } from '@app/services/auth.service';
 import { UsersAddUserComponent } from './components/users-add-user/users-add-user.component';
+import { UserService } from './services/user.service';
+import { Role } from '@app/models/enums/role.enum';
 
 @Component({
   selector: 'tm-users',
@@ -16,16 +19,24 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['name', 'surname', 'username', 'email'];
   dataSource!: MatTableDataSource<User>;
   users: User[];
+  curretUser: User | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private userService: UserService,
+    private authService: AuthService
+  ) {
+    this.curretUser = this.authService.currentUserValue;
     this.users = [];
     this.dataSource = new MatTableDataSource(this.users);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -48,7 +59,21 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: User) => {
       if (result) {
-        this.users = [...this.users, result];
+        result.password = 'password1234';
+        result.organizationName = this.curretUser?.organizationName as string;
+        result.role = Role.USER;
+        this.userService.addUser(result).subscribe(() => {
+          this.users = [...this.users, result];
+          this.dataSource.data = this.users;
+        });
+      }
+    });
+  }
+
+  getUsers(): void {
+    this.userService.allUsers().subscribe((users) => {
+      if (users.length) {
+        this.users = users.filter((u) => u.id !== this.curretUser?.id);
         this.dataSource.data = this.users;
       }
     });
